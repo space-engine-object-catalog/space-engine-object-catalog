@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  @apply text-white;
+}
+
+.title-text {
+  @apply text-6xl flex justify-center mt-100 mb-10;
+}
+
+.search-div {
+  @apply flex justify-center flex-row text-white;
+}
+
+.search-bar {
+  @apply w-100 h-10 bg-[rgb(24,24,24)] rounded-lg mr-5 p-3;
+}
+
+.search-button {
+  @apply w-20 h-10 bg-[rgb(24,24,24)] rounded-lg transition-colors cursor-pointer;
+  @apply hover:bg-[rgb(48,48,48)];
+}
