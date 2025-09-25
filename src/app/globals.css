@@ -9,6 +9,11 @@ h1 {
   @apply text-white;
 }
 
+button {
+  @apply bg-[rgb(24,24,24)] text-white rounded-lg transition-colors cursor-pointer;
+  @apply hover:bg-[rgb(48,48,48)];
+}
+
 .title-text {
   @apply text-6xl flex justify-center mt-100 mb-10;
 }
@@ -22,6 +27,9 @@ h1 {
 }
 
 .search-button {
-  @apply w-20 h-10 bg-[rgb(24,24,24)] rounded-lg transition-colors cursor-pointer;
-  @apply hover:bg-[rgb(48,48,48)];
+  @apply w-20 h-10;
+}
+
+.header {
+  @apply w-screen h-20 flex flex-col justify-center relative;
 }
