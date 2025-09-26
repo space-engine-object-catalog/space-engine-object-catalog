@@ -20,7 +20,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={lexend.className}>
         <div className="header">
-          <h1 className="text-3xl ml-5 cursor-pointer">Space Engine Object Catalog</h1>
+          <h1 className="text-3xl cursor-pointer">Space Engine Object Catalog</h1>
+          <div className="header-buttons">
+            <button>Planets</button>
+            <button>Stars</button>
+            <button>Galaxies</button>
+            <button>Other</button>
+          </div>
         </div>
         <div className="h-[1px] bg-white"></div>
         {children}

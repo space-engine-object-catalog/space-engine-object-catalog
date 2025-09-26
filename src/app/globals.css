@@ -31,5 +31,13 @@ button {
 }
 
 .header {
-  @apply w-screen h-20 flex flex-col justify-center relative;
+  @apply w-screen h-20 flex flex-row items-center justify-between px-5;
+}
+
+.header-buttons {
+  @apply flex gap-4;
+}
+
+.header-buttons button {
+  @apply w-20 h-10;
 }
