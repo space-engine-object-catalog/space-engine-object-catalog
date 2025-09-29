@@ -1,9 +1,15 @@
 "use client";
 
 import { useState } from 'react'
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [SearchBarContents, SetSearchBarContents] = useState<string>('')
+  const Router = useRouter();
+
+  const HandleSearch = () => {
+    Router.push("/object");
+  };
 
   return (
     <>
@@ -16,7 +22,7 @@ export default function Home() {
           className='search-bar'
         />
 
-        <button className='search-button'>Search</button>
+        <button className='search-button' onClick={HandleSearch}>Search</button>
       </div>
     </>
   );
