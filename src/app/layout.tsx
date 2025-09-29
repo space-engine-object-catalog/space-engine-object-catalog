@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Lexend } from 'next/font/google'
 import "./globals.css";
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={lexend.className}>
         <div className="header">
-          <h1 className="text-3xl cursor-pointer">Space Engine Object Catalog</h1>
+          <Link href="/" className="text-3xl text-white cursor-pointer">Space Engine Object Catalog</Link>
           <div className="header-buttons">
             <button>Planets</button>
             <button>Stars</button>
