@@ -8,7 +8,7 @@ export default function Home() {
   const Router = useRouter();
 
   const HandleSearch = () => {
-    Router.push("/object");
+    Router.push(`/object?query=${encodeURIComponent(SearchBarContents)}`);
   };
 
   return (

@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation';
 
 export default function ObjectPage() {
+  const SearchedObject = useSearchParams().get('query');
+
   const [ObjectName, SetObjectName] = useState<string>('');
   const [InGameName, SetInGameName] = useState<string>('');
   const [ObjectType, SetObjectType] = useState<string>('');
