@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
 
 export default function ObjectPage() {
-  const SearchedObject = useSearchParams().get('query');
+  const SearchedObject = useSearchParams().get('query') ?? "0";
 
   const [ObjectName, SetObjectName] = useState<string>('');
   const [InGameName, SetInGameName] = useState<string>('');
@@ -20,33 +20,48 @@ export default function ObjectPage() {
   const [Tags, SetTags] = useState<string>('');
 
   useEffect(() => {
-    SetObjectName("Kryo A");
-    SetInGameName("RSC 8513-2673-2-10-10");
-    SetObjectType("Star");
-    SetIsRealObject("Procedural Object");
-    SetESI("0");
-    SetChildCount("6");
-    SetLastUpdated("9/30/2025, 2:16:23 PM");
-    SetDiscoveryDate("9/23/2025");
-    SetSubmittedBy("Puppet");
-    SetVerificationStatus("verified");
-    SetDescription(
-      "Kryo A is a solar system I gave lore when I was bored in space engine. I gave it lore because it seemed cool and I was kinda bored while I was playing space engine. Kryo A has a proper description in game but I dont feel like opening the game to check."
-    );
-    SetTags("star, solar-system, star-system");
-  }, []);
+    const fetchData = async () => {
+      const endpoint = "https://seoc.puppet57.xyz/backend/get-object-info.php";
+
+      const res = await fetch(`${endpoint}?query=${encodeURIComponent(SearchedObject)}`);
+      let object_data = await res.text();
+      console.log(object_data);
+
+      if (object_data === "Object doesn't exist!") {
+        object_data = "Object doesn't exist!;Object doesn't exist!;Non Existent;0;0;0;non-existent;Never;Never;No One;verified";
+      }
+
+      const data_array = object_data.split(";");
+
+      SetObjectName(data_array[0]);
+      SetInGameName(SearchedObject);
+      SetObjectType(data_array[2]);
+      SetIsRealObject(data_array[3] == "1" ? "Real Object" : "Procedural Object");
+      SetESI(data_array[4]);
+      SetChildCount(data_array[5]);
+      SetLastUpdated(data_array[7]);
+      SetDiscoveryDate(data_array[8]);
+      SetSubmittedBy(data_array[9]);
+      SetVerificationStatus(data_array[10]);
+      SetDescription(data_array[1]);
+      SetTags(data_array[6]);
+    };
+
+    fetchData();
+  }, [SearchedObject]);
 
   return (
     <>
       <h1 className="text-5xl m-5 mb-2">{ObjectName}</h1>
       <h2 className="text-2xl ml-5 mb-2">In Game Name: {InGameName}</h2>
       <h2 className="text-2xl ml-5 mb-2">Object Type: {ObjectType}</h2>
+      <h2 className="text-2xl ml-5 mb-2">Child Count: {ChildCount}</h2>
       <h2 className="text-2xl ml-5 mb-2">{IsRealObject}</h2>
       <h2 className="text-2xl ml-5 mb-2">Discovered: {DiscoveryDate}</h2>
       {VerificationStatus == "verified" && <div className='h-2.5'></div>}
       {VerificationStatus == "unverified" && <h2 className="!text-[#ff9100] text-2xl ml-5 mb-4.5">This article is not verified! It may be inaccurate!</h2>}
       <div className="w-screen h-[1px] bg-white mb-4.5"></div>
-      <p className="m-5 mt-0 text-[30px]">{Description}</p>
+      <p className="m-5 mt-0 text-[30px] whitespace-pre-line">{Description}</p>
     </>
   );
 }
