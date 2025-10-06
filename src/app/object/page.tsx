@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation';
+import MarkdownParagraph from "@/components/markdownparagraph/MarkdownParagraph";
 
 export default function ObjectPage() {
   const SearchedObject = useSearchParams().get('query') ?? "0";
@@ -65,7 +66,9 @@ export default function ObjectPage() {
       {VerificationStatus == "verified" && <div className='h-2.5'></div>}
       {VerificationStatus == "unverified" && <h2 className="!text-[#ff9100] text-2xl ml-5 mb-4.5">This article is not verified! It may be inaccurate!</h2>}
       <div className="w-screen h-[1px] bg-white mb-4.5"></div>
-      <p className="m-5 mt-0 text-[30px] whitespace-pre-line">{Description}</p>
+      <div className='ml-5'>
+        <MarkdownParagraph text={`${Description}`} />
+      </div>
     </>
   );
 }
