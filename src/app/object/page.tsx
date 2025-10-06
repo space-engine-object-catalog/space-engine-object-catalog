@@ -52,6 +52,10 @@ export default function ObjectPage() {
 
   return (
     <>
+      <div className='float-right'>
+        <h3 className="text-[20px] m-3 mb-2 text-right">Submitted By: {SubmittedBy}</h3>
+        <h3 className="text-[20px] m-3 mb-2 mt-0 text-right">Last Updated: {LastUpdated}</h3>
+      </div>
       <h1 className="text-5xl m-5 mb-2">{ObjectName}</h1>
       <h2 className="text-2xl ml-5 mb-2">In Game Name: {InGameName}</h2>
       <h2 className="text-2xl ml-5 mb-2">Object Type: {ObjectType}</h2>
