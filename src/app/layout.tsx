@@ -27,6 +27,7 @@ export default function RootLayout({
             <button>Stars</button>
             <button>Galaxies</button>
             <button>Other</button>
+            <button>Upload</button>
           </div>
         </div>
         <div className="h-[1px] bg-white"></div>
