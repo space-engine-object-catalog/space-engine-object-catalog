@@ -38,7 +38,7 @@ export default function ObjectPage() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Shift") {
+      if (e.key === "Control") {
         SetSecretKeyShown(!SecretKeyShown);
       }
     };
@@ -71,10 +71,16 @@ export default function ObjectPage() {
           />
           <span className="slider"></span>
         </label>
-        {ObjectType.toLowerCase() == "planet" && <>
-          <p>ESI:</p>
-          <textarea className='w-full h-12 mb-2 p-2 text-white search-bar resize-none' value={ESI} onChange={(e) => SetESI(e.target.value)} />
-        </>}
+        {["planet", "moon", "dwarf planet"].includes(ObjectType.toLowerCase()) && (
+          <>
+            <p>ESI:</p>
+            <textarea
+              className='w-full h-12 mb-2 p-2 text-white search-bar resize-none'
+              value={ESI}
+              onChange={(e) => SetESI(e.target.value)}
+            />
+          </>
+        )}
         <p>Child Count:</p>
         <textarea
           className='w-full h-12 mb-2 p-2 text-white search-bar resize-none'
