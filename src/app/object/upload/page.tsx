@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MarkdownParagraph from "@/components/markdownparagraph/MarkdownParagraph";
 import axios from 'axios';
 
@@ -16,6 +16,8 @@ export default function ObjectPage() {
   const [Description, SetDescription] = useState<string>('');
   const [Tags, SetTags] = useState<string>('');
   const [UploadResponse, SetUploadResponse] = useState<string>('');
+  const [SecretKey, SetSecretKey] = useState<string>('');
+  const [SecretKeyShown, SetSecretKeyShown] = useState<boolean>(false);
 
   const uploadObject = async () => {
     const res = await axios.post('https://seoc.puppet57.xyz/backend/submit-object.php', new URLSearchParams({
@@ -28,10 +30,25 @@ export default function ObjectPage() {
       desc: Description,
       tags: Tags,
       submitted_by: SubmittedBy,
-      discovery_date: DiscoveryDate.toString()
+      discovery_date: DiscoveryDate.toString(),
+      secret_key: SecretKey
     }));
     SetUploadResponse(res.data);
   }
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Shift") {
+        SetSecretKeyShown(!SecretKeyShown);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [SecretKeyShown, SetSecretKeyShown]);
 
   return (
     <>
@@ -75,6 +92,15 @@ export default function ObjectPage() {
         <textarea className='w-full h-12 mb-2 p-2 text-white search-bar resize-none' value={Tags} onChange={(e) => SetTags(e.target.value)} />
         <p>Description (Markdown Supported):</p>
         <textarea className='w-full h-40 mb-2 p-2 text-white search-bar resize-none' value={Description} onChange={(e) => SetDescription(e.target.value)} />
+        {SecretKeyShown && <>
+          <p>Secret Key:</p>
+          <input
+            type="password"
+            className='w-full h-12 mb-2 p-2 text-white search-bar'
+            value={SecretKey}
+            onChange={(e) => SetSecretKey(e.target.value)}
+          />
+        </>}
       </div>
       <p className='ml-2'>Preview:</p>
       <div className='float-right'>
