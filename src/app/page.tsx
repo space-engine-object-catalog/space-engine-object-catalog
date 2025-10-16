@@ -19,7 +19,7 @@ export default function Home() {
           type='text'
           value={SearchBarContents}
           onChange={e => SetSearchBarContents(e.target.value)}
-          className='search-bar'
+          className='search-bar w-100 h-10'
         />
 
         <button className='search-button' onClick={HandleSearch}>Search</button>

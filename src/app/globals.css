@@ -23,7 +23,7 @@ button {
 }
 
 .search-bar {
-  @apply w-100 h-10 bg-[rgb(24,24,24)] rounded-lg mr-5 p-3;
+  @apply bg-[rgb(24,24,24)] rounded-lg mr-5 p-3;
 }
 
 .search-button {
