@@ -25,7 +25,7 @@ export default function ObjectPage() {
       in_game_name: InGameName,
       object_type: ObjectType,
       is_real_object: IsRealObject ? '1' : '0',
-      esi: ESI == '' || ObjectType.toLowerCase() != "planet" ? '0' : ESI,
+      esi: ESI == '' || !["planet", "moon", "dwarf planet", "dwarf moon", "astroid", "comet"].includes(ObjectType.toLowerCase()) ? '0' : ESI,
       child_count: ChildCount.toString(),
       desc: Description,
       tags: Tags,
@@ -71,7 +71,7 @@ export default function ObjectPage() {
           />
           <span className="slider"></span>
         </label>
-        {["planet", "moon", "dwarf planet"].includes(ObjectType.toLowerCase()) && (
+        {["planet", "moon", "dwarf planet", "dwarf moon", "astroid", "comet"].includes(ObjectType.toLowerCase()) && (
           <>
             <p>ESI:</p>
             <textarea
@@ -119,7 +119,7 @@ export default function ObjectPage() {
       <h2 className="text-2xl ml-5 mb-2">Child Count: {ChildCount}</h2>
       <h2 className="text-2xl ml-5 mb-2">{IsRealObject}</h2>
       <h2 className="text-2xl ml-5 mb-2">Discovered: {DiscoveryDate}</h2>
-      {ObjectType.toLowerCase() == "planet" && <h2 className="text-2xl ml-5 mb-2">ESI: {ESI}</h2>}
+      {["planet", "moon", "dwarf planet", "dwarf moon", "astroid", "comet"].includes(ObjectType.toLowerCase()) && ( <h2 className="text-2xl ml-5 mb-2">ESI: {ESI}</h2>)}
       <div className="w-screen h-[1px] bg-white mb-4.5"></div>
       <div className='ml-5'>
         <MarkdownParagraph text={Description} />
