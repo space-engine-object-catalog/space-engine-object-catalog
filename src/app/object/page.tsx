@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import MarkdownParagraph from "@/components/markdownparagraph/MarkdownParagraph";
 
-export default function ObjectPage() {
+function ObjectContent() {
   const SearchedObject = useSearchParams().get('query') ?? "0";
 
   const [ObjectName, SetObjectName] = useState<string>('');
@@ -64,13 +64,27 @@ export default function ObjectPage() {
       <h2 className="text-2xl ml-5 mb-2">Child Count: {ChildCount}</h2>
       <h2 className="text-2xl ml-5 mb-2">{IsRealObject}</h2>
       <h2 className="text-2xl ml-5 mb-2">Discovered: {DiscoveryDate}</h2>
-      {["planet", "moon", "dwarf planet", "dwarf moon", "astroid", "comet"].includes(ObjectType.toLowerCase()) && ( <h2 className="text-2xl ml-5 mb-2">ESI: {ESI}</h2>)}
+      {["planet", "moon", "dwarf planet", "dwarf moon", "astroid", "comet"].includes(ObjectType.toLowerCase()) && (
+        <h2 className="text-2xl ml-5 mb-2">ESI: {ESI}</h2>
+      )}
       {VerificationStatus == "verified" && <div className='h-2.5'></div>}
-      {VerificationStatus == "unverified" && <h2 className="!text-[#ff9100] text-2xl ml-5 mb-4.5">This article is not verified! It may be inaccurate!</h2>}
+      {VerificationStatus == "unverified" && (
+        <h2 className="!text-[#ff9100] text-2xl ml-5 mb-4.5">
+          This article is not verified! It may be inaccurate!
+        </h2>
+      )}
       <div className="w-screen h-[1px] bg-white mb-4.5"></div>
       <div className='ml-5'>
         <MarkdownParagraph text={`${Description}`} />
       </div>
     </>
+  );
+}
+
+export default function ObjectPage() {
+  return (
+    <Suspense fallback={<div>Loading object...</div>}>
+      <ObjectContent />
+    </Suspense>
   );
 }
