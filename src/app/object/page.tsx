@@ -22,7 +22,7 @@ function ObjectContent() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = "https://seoc.puppet57.xyz/backend/get-object-info.php";
+      const endpoint = "https://seoc-server.puppet57.xyz/get-object-info.php";
 
       const res = await fetch(`${endpoint}?query=${encodeURIComponent(SearchedObject)}`);
       let object_data = await res.text();

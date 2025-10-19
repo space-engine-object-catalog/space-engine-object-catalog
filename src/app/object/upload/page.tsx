@@ -20,7 +20,7 @@ export default function ObjectPage() {
   const [SecretKeyShown, SetSecretKeyShown] = useState<boolean>(false);
 
   const uploadObject = async () => {
-    const res = await axios.post('https://seoc.puppet57.xyz/backend/submit-object.php', new URLSearchParams({
+    const res = await axios.post('https://seoc-server.puppet57.xyz/submit-object.php', new URLSearchParams({
       name: ObjectName,
       in_game_name: InGameName,
       object_type: ObjectType,
