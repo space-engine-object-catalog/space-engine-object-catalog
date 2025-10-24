@@ -35,7 +35,7 @@ export default function RootLayout({
             <button onClick={HandleUpload}>Upload</button>
           </div>
         </div>
-        <div className="h-[1px] bg-white"></div>
+        <div className="h-px bg-white"></div>
         {children}
       </body>
     </html>
